@@ -76,11 +76,18 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   background: var(--wall);
   background-image:
     radial-gradient(ellipse 130% 60% at 20% -10%, rgba(13, 155, 106, 0.08) 0%, transparent 60%),
@@ -91,6 +98,8 @@ body {
   font: 400 16px/1.6 'DM Sans', 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 h1, h2, h3, .brand b, .code {
@@ -343,6 +352,13 @@ nav button[aria-selected="true"]::after {
 .clock-zone { color: var(--ok); font-weight: 800; }
 
 /* ─── Focus states ─── */
+button,
+input,
+select,
+textarea {
+  min-height: 44px;
+}
+
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
@@ -1987,6 +2003,68 @@ footer .wrap { max-width: 960px; }
 
   .staff-actions .btn { width: 100%; }
   .preview-foot { flex-wrap: wrap; }
+}
+
+@media (max-width: 390px) {
+  .wrap { padding-right: 14px; padding-left: 14px; }
+
+  .top .wrap {
+    padding-top: calc(10px + env(safe-area-inset-top, 0px));
+    padding-bottom: 10px;
+  }
+
+  .brand {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .brand span {
+    display: none;
+  }
+
+  .header-tools {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .live-clock {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-inline: 10px;
+  }
+
+  .clock-time {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+
+  .clock-meta {
+    font-size: 8.5px;
+  }
+
+  .theme-toggle {
+    top: 8px;
+    right: 14px;
+  }
+
+  .btn,
+  nav button,
+  input,
+  select,
+  textarea {
+    min-height: 46px;
+  }
+
+  .actions,
+  .home-actions {
+    flex-direction: column;
+  }
+
+  .actions .btn,
+  .home-actions .btn {
+    width: 100%;
+  }
 }
 
 /* ─── Reduced Motion ─── */
